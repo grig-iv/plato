@@ -1,22 +1,55 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
+
+type style struct {
+	fg string
+	bg string
+}
+
+var (
+	promptSymbolStyle = style{fg: "#FAB387"}
+)
 
 func main() {
 	fmt.Print("\n")
-	fg(0xfa, 0xb3, 0x87)
-	fmt.Print("   ")
-	resetColors()
+	print("  ", promptSymbolStyle)
 }
 
-func fg(r, g, b int) {
-	fmt.Printf("\033[38;2;%d;%d;%dm", r, g, b)
-}
 
-func bg(r, g, b int) {
-	fmt.Printf("\033[48;2;%d;%d;%dm", r, g, b)
-}
+func print(text string, style style) {
+	if style.fg != "" {
+		r, g, b := colorValues(style.fg)
+		fmt.Printf("\033[38;2;%d;%d;%dm", r, g, b)
+	}
 
-func resetColors() {
+	if style.bg != "" {
+		r, g, b := colorValues(style.bg)
+		fmt.Printf("\033[48;2;%d;%d;%dm", r, g, b)
+	}
+
+	// reset colors
 	fmt.Printf("\033[0m")
+}
+
+func colorValues(color string) (r, g, b int64) {
+	r, err := strconv.ParseInt(color[1:3], 16, 16)
+	if err != nil {
+		panic(err)
+	}
+
+	g, err = strconv.ParseInt(color[3:5], 16, 16)
+	if err != nil {
+		panic(err)
+	}
+
+	b, err = strconv.ParseInt(color[5:], 16, 16)
+	if err != nil {
+		panic(err)
+	}
+
+	return r, g, b
 }
