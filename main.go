@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 )
 
@@ -12,13 +13,23 @@ type style struct {
 
 var (
 	promptSymbolStyle = style{fg: "#FAB387"}
+	nixIconStyle      = style{fg: "#7eb7e2"}
 )
 
 func main() {
 	fmt.Print("\n")
+	printLable()
 	print("  ", promptSymbolStyle)
 }
 
+func printLable() {
+	if os.Getenv("IN_NIX_SHELL") != "" {
+		print("󱄅", nixIconStyle)
+		return
+	}
+
+	fmt.Printf(" ")
+}
 
 func print(text string, style style) {
 	if style.fg != "" {
@@ -31,8 +42,9 @@ func print(text string, style style) {
 		fmt.Printf("\033[48;2;%d;%d;%dm", r, g, b)
 	}
 
-	// reset colors
-	fmt.Printf("\033[0m")
+	fmt.Print(text)
+
+	fmt.Print("\033[0m")
 }
 
 func colorValues(color string) (r, g, b int64) {
