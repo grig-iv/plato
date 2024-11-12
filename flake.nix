@@ -19,6 +19,9 @@
           name = "plato";
           src = ./.;
           vendorHash = "sha256-qf787Dg6Xy3HGkgroATQ+Xd15muLpkVDuzFskBktEXo=";
+          meta = {
+            mainProgram = "plato";
+          };
         };
       }
     );
