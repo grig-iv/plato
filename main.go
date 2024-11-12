@@ -74,30 +74,34 @@ func lable() (string, style) {
 }
 
 func promptSymbol() (string, style) {
-	style := style{fg: "#89dceb"}
-	today := time.Now()
+	defaultStyle := style{fg: "#fab387"}
+	now := time.Now()
 
-	_, month, day := today.Date()
+	_, month, day := now.Date()
 	if month == time.November && day == 14 {
-		return "󰃩", style
+		return "󰃩", defaultStyle
 	}
 
 	if month == time.April && day == 1 {
-		return "ඞ", style
+		return "ඞ", defaultStyle
 	}
 
 	if month == time.October && day == 31 {
-		return "󰮿", style
+		return "󰮿", defaultStyle
 	}
 
 	if (month == time.December || month == time.June) && day == 21 {
-		return "", style
+		return "", defaultStyle
 	}
 
 	if (month == time.December && day >= 31-14) ||
 		(month == time.January && day <= 14) {
-		return "", style
+		return "", defaultStyle
 	}
 
-	return "", style
+	if now.Hour() > 23 || now.Hour() < 7 {
+		return "󰤄", style{fg: "#f38ba8"}
+	}
+
+	return "", defaultStyle
 }
