@@ -6,6 +6,25 @@ import (
 	"strings"
 )
 
+type lableMatch struct {
+	pattern string
+	lable   string
+	style   style
+}
+
+var (
+	homeDir       = os.Getenv("HOME") + "/"
+	workingDir, _ = os.Getwd()
+)
+
+var dirLabels = []lableMatch{
+	{pattern: "~/.config/*", lable: ""},
+	{pattern: "~/Extended Mind/*", lable: "󰧑"},
+	{pattern: "~/sources/*", lable: ""},
+	{pattern: "~/", lable: ""},
+	{pattern: "/", lable: "/"},
+}
+
 func init() {
 	// for debugg
 	if len(os.Args) == 2 {
@@ -32,16 +51,10 @@ func lable() (string, style) {
 		return "󱄅", style{fg: "#7eb7e2"}
 	}
 
-	if match("~/.config/*") {
-		return "", style{}
-	}
-
-	if match("~/*") {
-		return "", style{}
-	}
-
-	if match("/") {
-		return "/", style{}
+	for _, m := range dirLabels {
+		if match(workingDir, m.pattern) {
+			return m.lable, m.style
+		}
 	}
 
 	return "", style{}

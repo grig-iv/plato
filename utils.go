@@ -1,20 +1,14 @@
 package main
 
 import (
-	"os"
 	"strings"
 
 	"github.com/gobwas/glob"
 )
 
-var (
-	homeDir       = os.Getenv("HOME") + "/"
-	workingDir, _ = os.Getwd()
-)
-
-func match(pattern string) bool {
+func match(dir, pattern string) bool {
 	g := glob.MustCompile(replaceTilde(pattern))
-	return g.Match(workingDir)
+	return g.Match(dir)
 }
 
 func replaceTilde(dirPath string) string {
