@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 type lableMatch struct {
@@ -54,6 +55,8 @@ func main() {
 	fmt.Print("  ")
 
 	print(promptSymbol())
+
+	fmt.Print(" ")
 }
 
 func lable() (string, style) {
@@ -71,5 +74,26 @@ func lable() (string, style) {
 }
 
 func promptSymbol() (string, style) {
-	return " ", style{fg: "#fab387"}
+	style := style{fg: "#89dceb"}
+	today := time.Now()
+
+	_, month, day := today.Date()
+	if month == time.November && day == 14 {
+		return "󰃩", style
+	}
+
+	if month == time.April && day == 1 {
+		return "ඞ", style
+	}
+
+	if (month == time.December || month == time.June) && day == 21 {
+		return "", style
+	}
+
+	if (month == time.December && day >= 31-14) ||
+		(month == time.January && day <= 14) {
+		return "", style
+	}
+
+	return "", style
 }
