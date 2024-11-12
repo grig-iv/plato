@@ -86,6 +86,10 @@ func promptSymbol() (string, style) {
 		return "ඞ", style
 	}
 
+	if month == time.October && day == 31 {
+		return "󰮿", style
+	}
+
 	if (month == time.December || month == time.June) && day == 21 {
 		return "", style
 	}
