@@ -16,6 +16,7 @@ type lableMatch struct {
 var (
 	homeDir       = os.Getenv("HOME") + "/"
 	workingDir, _ = os.Getwd()
+	now           = time.Now()
 )
 
 var dirLabels = []lableMatch{
@@ -48,7 +49,12 @@ func init() {
 }
 
 func main() {
-	fmt.Print("\n")
+	fmt.Println()
+
+	if isBedTime() {
+		print(now.Format("󰤄 15:04"), style{fg: "#f38ba8"})
+		fmt.Println()
+	}
 
 	print(lable())
 
@@ -57,6 +63,10 @@ func main() {
 	print(promptSymbol())
 
 	fmt.Print(" ")
+}
+
+func isBedTime() bool {
+	return now.Hour() > 23 || now.Hour() < 7
 }
 
 func lable() (string, style) {
@@ -75,7 +85,6 @@ func lable() (string, style) {
 
 func promptSymbol() (string, style) {
 	defaultStyle := style{fg: "#fab387"}
-	now := time.Now()
 
 	_, month, day := now.Date()
 	if month == time.November && day == 14 {
@@ -97,10 +106,6 @@ func promptSymbol() (string, style) {
 	if (month == time.December && day >= 31-14) ||
 		(month == time.January && day <= 14) {
 		return "", defaultStyle
-	}
-
-	if now.Hour() > 23 || now.Hour() < 7 {
-		return "󰤄", style{fg: "#f38ba8"}
 	}
 
 	return "", defaultStyle
