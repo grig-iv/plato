@@ -5,22 +5,26 @@ import (
 	"os"
 )
 
-var (
-	promptSymbolStyle = style{fg: "#FAB387"}
-	nixIconStyle      = style{fg: "#7eb7e2"}
-)
-
 func main() {
 	fmt.Print("\n")
-	printLable()
-	print("  ", promptSymbolStyle)
+
+	print(lable())
+	print(promptSymbol())
 }
 
-func printLable() {
+func lable() (string, style) {
 	if os.Getenv("IN_NIX_SHELL") != "" {
-		print("󱄅", nixIconStyle)
-		return
+		return "󱄅", style{fg: "#7eb7e2"}
 	}
 
-	fmt.Printf("")
+	_, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+
+	return "ඞ", style{fg: "#b01000"}
+}
+
+func promptSymbol() (string, style) {
+	return "  ", style{fg: "#fab387"}
 }
