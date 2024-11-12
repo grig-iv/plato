@@ -3,12 +3,27 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
+
+func init() {
+	// for debugg
+	if len(os.Args) == 2 {
+		workingDir = replaceTilde(os.Args[1])
+	}
+
+	if strings.HasSuffix(workingDir, "/") == false {
+		workingDir = workingDir + "/"
+	}
+}
 
 func main() {
 	fmt.Print("\n")
 
 	print(lable())
+
+	fmt.Print("  ")
+
 	print(promptSymbol())
 }
 
@@ -17,14 +32,21 @@ func lable() (string, style) {
 		return "󱄅", style{fg: "#7eb7e2"}
 	}
 
-	_, err := os.Getwd()
-	if err != nil {
-		panic(err)
+	if match("~/.config/*") {
+		return "", style{}
 	}
 
-	return "ඞ", style{fg: "#b01000"}
+	if match("~/*") {
+		return "", style{}
+	}
+
+	if match("/") {
+		return "/", style{}
+	}
+
+	return "", style{}
 }
 
 func promptSymbol() (string, style) {
-	return "  ", style{fg: "#fab387"}
+	return " ", style{fg: "#fab387"}
 }
