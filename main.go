@@ -19,21 +19,21 @@ var (
 )
 
 var dirLabels = []lableMatch{
-	{pattern: "~/.config/*", lable: "󰒓"},
-	{pattern: "~/extended mind/*", lable: "󰧑"},
-	{pattern: "~/desktop/*", lable: "󰇄"},
-	{pattern: "~/cloud/*", lable: ""},
-	{pattern: "~/sources/*", lable: ""},
-	{pattern: "~/", lable: ""},
+	{lable: "󰒓", pattern: "~/.config/*"},
+	{lable: "󰧑", pattern: "~/extended mind/*"},
+	{lable: "󰇄", pattern: "~/desktop/*"},
+	{lable: "", pattern: "~/cloud/*"},
+	{lable: "", pattern: "~/sources/*"},
+	{lable: "", pattern: "~/"},
 
-	{pattern: "*/downloads/*", lable: "󱃩"},
-	{pattern: "*/books/*", lable: "󱉟"},
+	{lable: "󱃩", pattern: "*/downloads/*"},
+	{lable: "󱉟", pattern: "*/books/*"},
 
-	{pattern: "/etc/nixos/*", lable: "󱄅"},
-	{pattern: "/run/media/*", lable: "󰕓"},
-	{pattern: "/mnt/c/*", lable: ""},
-	{pattern: "/mnt/*", lable: "󰋊"},
-	{pattern: "/", lable: "/"},
+	{lable: "󱄅", pattern: "/etc/nixos/*"},
+	{lable: "󰕓", pattern: "/run/media/*"},
+	{lable: "", pattern: "/mnt/c/*"},
+	{lable: "󰋊", pattern: "/mnt/*"},
+	{lable: "/", pattern: "/"},
 }
 
 func init() {
