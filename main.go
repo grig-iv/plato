@@ -19,9 +19,19 @@ var (
 
 var dirLabels = []lableMatch{
 	{pattern: "~/.config/*", lable: ""},
-	{pattern: "~/Extended Mind/*", lable: "󰧑"},
+	{pattern: "~/extended mind/*", lable: "󰧑"},
+	{pattern: "~/desktop/*", lable: "󰇄"},
+	{pattern: "~/cloud/*", lable: ""},
 	{pattern: "~/sources/*", lable: ""},
 	{pattern: "~/", lable: ""},
+
+	{pattern: "*/downloads/*", lable: "󱃩"},
+	{pattern: "*/books/*", lable: "󱉟"},
+
+	{pattern: "/etc/nixos/*", lable: "󱄅"},
+	{pattern: "/run/media/*", lable: "󰕓"},
+	{pattern: "/mnt/c/*", lable: ""},
+	{pattern: "/mnt/*", lable: "󰋊"},
 	{pattern: "/", lable: "/"},
 }
 

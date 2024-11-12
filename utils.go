@@ -7,7 +7,11 @@ import (
 )
 
 func match(dir, pattern string) bool {
-	g := glob.MustCompile(replaceTilde(pattern))
+	pattern = replaceTilde(pattern)
+	pattern = strings.ToLower(pattern)
+	dir = strings.ToLower(dir)
+
+	g := glob.MustCompile(pattern)
 	return g.Match(dir)
 }
 
