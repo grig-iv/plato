@@ -21,7 +21,7 @@ var (
 
 var dirLabels = []lableMatch{
 	{lable: "󰒓", pattern: "~/.config/*"},
-	{lable: "󰧑", pattern: "~/extended mind/*"},
+	{lable: "󰧑", pattern: "~/mind/*"},
 	{lable: "󰇄", pattern: "~/desktop/*"},
 	{lable: "", pattern: "~/cloud/*"},
 	{lable: "", pattern: "~/sources/*"},
